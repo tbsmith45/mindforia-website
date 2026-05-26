@@ -1,0 +1,548 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindforia – Your Personal AI Companion for Mental Harmony</title>
+<meta name="description" content="Mindforia is your personal AI companion that remembers you, supports you, and grows with you. Start your 7-day free trial today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a0f1e;--navy2:#0d1428;--navy3:#111827;
+  --cyan:#00d4ff;--cyan2:#00b8e6;--purple:#8b5cf6;--purple2:#7c3aed;
+  --glass:rgba(255,255,255,0.04);--glass2:rgba(255,255,255,0.08);
+  --border:rgba(0,212,255,0.15);--border2:rgba(139,92,246,0.2);
+  --text:#e2e8f0;--muted:#94a3b8;--white:#fff;
+  --transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--text);overflow-x:hidden}
+h1,h2,h3,h4,.brand{font-family:'Rajdhani',sans-serif}
+canvas#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.4}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:0 5%;transition:var(--transition);border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(10,15,30,0.92);backdrop-filter:blur(20px);border-color:var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{font-size:28px;filter:drop-shadow(0 0 12px rgba(0,212,255,.6))}
+.logo-text{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:3px;text-transform:uppercase;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-sub{font-size:9px;color:var(--cyan);letter-spacing:2px;opacity:.7;line-height:1;font-family:'Rajdhani',sans-serif}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:var(--transition);letter-spacing:.5px}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.btn-outline{padding:9px 22px;border:1.5px solid var(--border);border-radius:8px;color:var(--cyan);background:transparent;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:var(--transition);letter-spacing:.5px;font-family:'Inter',sans-serif}
+.btn-outline:hover{background:rgba(0,212,255,.08);border-color:var(--cyan)}
+.btn-primary{padding:10px 24px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:var(--transition);letter-spacing:.5px;font-family:'Inter',sans-serif}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 25px rgba(0,212,255,.3)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--cyan);border-radius:2px;transition:var(--transition)}
+.mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(10,15,30,.98);backdrop-filter:blur(20px);padding:24px;border-bottom:1px solid var(--border);z-index:99;flex-direction:column;gap:16px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text);text-decoration:none;font-size:16px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:120px 5% 80px;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(0,212,255,.07) 0,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 20%,rgba(139,92,246,.08) 0,transparent 60%),radial-gradient(ellipse 50% 40% at 20% 80%,rgba(0,212,255,.05) 0,transparent 60%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);border-radius:100px;font-size:13px;color:var(--cyan);margin-bottom:28px;letter-spacing:.5px}
+.hero-badge::before{content:'✦';animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(42px,6vw,80px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:24px;background:linear-gradient(135deg,#fff 30%,var(--cyan) 60%,var(--purple) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:620px;margin:0 auto 40px;line-height:1.7;font-weight:400}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.btn-hero{padding:16px 36px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:var(--transition);font-family:'Inter',sans-serif;letter-spacing:.3px}
+.btn-hero-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;border:none;box-shadow:0 8px 32px rgba(0,212,255,.25)}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,212,255,.35)}
+.btn-hero-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.2)}
+.btn-hero-outline:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.4)}
+.hero-note{font-size:13px;color:var(--muted);opacity:.7}
+.hero-note span{color:var(--cyan)}
+.hero-preview{margin-top:60px;position:relative;max-width:700px;margin-left:auto;margin-right:auto}
+.chat-window{background:rgba(13,20,40,.8);border:1px solid var(--border);border-radius:20px;padding:28px;backdrop-filter:blur(20px);box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 0 1px rgba(0,212,255,.08),inset 0 1px 0 rgba(255,255,255,.05)}
+.chat-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(0,212,255,.3),rgba(139,92,246,.3));border:2px solid rgba(0,212,255,.4);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 20px rgba(0,212,255,.2)}
+.chat-name{font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--cyan);letter-spacing:1px}
+.online{font-size:12px;color:#22d3ee;display:flex;align-items:center;gap:5px}
+.online::before{content:'';width:7px;height:7px;border-radius:50%;background:#22d3ee;display:inline-block;animation:onlinePulse 2s infinite}
+@keyframes onlinePulse{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.4)}50%{box-shadow:0 0 0 6px rgba(34,211,238,0)}}
+.msg{display:flex;gap:12px;margin-bottom:16px;animation:fadeIn .5s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{flex-direction:row-reverse}
+.msg-bubble{padding:12px 16px;border-radius:16px;font-size:14px;line-height:1.6;max-width:80%;text-align:left}
+.msg-bubble.ai{background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.12);color:var(--text)}
+.msg-bubble.user{background:linear-gradient(135deg,rgba(139,92,246,.3),rgba(0,212,255,.2));border:1px solid rgba(139,92,246,.2);color:var(--white)}
+
+/* SECTION BASE */
+section{position:relative;z-index:1}
+.section-pad{padding:100px 5%}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.section-title{font-size:clamp(32px,4vw,52px);font-weight:700;line-height:1.15;letter-spacing:-.5px;margin-bottom:20px;background:linear-gradient(135deg,#fff,rgba(226,232,240,.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-sub{font-size:18px;color:var(--muted);max-width:560px;line-height:1.7}
+.text-center{text-align:center}
+.text-center .section-sub{margin:0 auto}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.feature-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:32px 28px;transition:var(--transition);position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,.04),rgba(139,92,246,.04));opacity:0;transition:var(--transition)}
+.feature-card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,.3);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.feature-card:hover::before{opacity:1}
+.feature-icon{font-size:36px;margin-bottom:20px;display:block}
+.feature-card h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:12px;letter-spacing:.5px}
+.feature-card p{font-size:15px;color:var(--muted);line-height:1.7}
+
+/* HOW IT WORKS */
+.how-bg{background:linear-gradient(180deg,transparent,rgba(139,92,246,.04),transparent)}
+.steps{display:flex;gap:0;margin-top:64px;position:relative}
+.steps::before{content:'';position:absolute;top:48px;left:calc(16.66% + 24px);right:calc(16.66% + 24px);height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));opacity:.3}
+.step{flex:1;text-align:center;padding:0 24px;position:relative}
+.step-num{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(139,92,246,.15));border:2px solid rgba(0,212,255,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:32px;position:relative;z-index:1;transition:var(--transition)}
+.step:hover .step-num{transform:scale(1.1);box-shadow:0 0 40px rgba(0,212,255,.2)}
+.step h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:12px}
+.step p{font-size:15px;color:var(--muted);line-height:1.7}
+.step-badge{display:inline-block;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:8px}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.testi-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:28px;transition:var(--transition)}
+.testi-card:hover{transform:translateY(-4px);border-color:rgba(139,92,246,.3);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.stars{color:#fbbf24;font-size:15px;margin-bottom:16px;letter-spacing:2px}
+.testi-text{font-size:15px;color:var(--text);line-height:1.75;margin-bottom:20px;font-style:italic;opacity:.9}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0}
+.testi-name{font-weight:600;font-size:14px;color:#fff}
+.testi-role{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px;align-items:start}
+.plan{background:var(--glass);border:1px solid var(--border);border-radius:24px;padding:36px 32px;transition:var(--transition);position:relative}
+.plan.featured{background:linear-gradient(135deg,rgba(0,212,255,.06),rgba(139,92,246,.06));border-color:rgba(0,212,255,.35);box-shadow:0 20px 60px rgba(0,212,255,.1),0 0 0 1px rgba(0,212,255,.15)}
+.plan:hover{transform:translateY(-6px)}
+.plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;font-size:12px;font-weight:700;padding:6px 20px;border-radius:100px;letter-spacing:1px;white-space:nowrap}
+.plan-name{font-size:20px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin-bottom:8px;font-family:'Rajdhani',sans-serif}
+.plan-price{font-size:48px;font-weight:700;color:#fff;line-height:1;font-family:'Rajdhani',sans-serif;margin-bottom:4px}
+.plan-price span{font-size:18px;color:var(--muted);font-weight:400}
+.plan-period{font-size:14px;color:var(--muted);margin-bottom:28px}
+.plan-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:24px}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.plan-features li{font-size:14px;color:var(--text);display:flex;align-items:center;gap:10px}
+.plan-features li::before{content:'✓';color:var(--cyan);font-weight:700;font-size:15px;flex-shrink:0}
+.plan-btn{width:100%;padding:14px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:'Inter',sans-serif;letter-spacing:.3px;text-align:center;text-decoration:none;display:block}
+.plan-btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;border:none;box-shadow:0 8px 24px rgba(0,212,255,.2)}
+.plan-btn-primary:hover{box-shadow:0 12px 32px rgba(0,212,255,.35);transform:translateY(-1px)}
+.plan-btn-outline{background:transparent;color:var(--cyan);border:1.5px solid var(--border)}
+.plan-btn-outline:hover{background:rgba(0,212,255,.08);border-color:var(--cyan)}
+.free-note{text-align:center;margin-top:20px;font-size:14px;color:var(--muted)}
+.free-note span{color:var(--cyan);font-weight:600}
+
+/* CTA BANNER */
+.cta-banner{background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(139,92,246,.1));border:1px solid rgba(0,212,255,.2);border-radius:28px;padding:72px 48px;text-align:center;margin:0 5%;max-width:1200px;margin-left:auto;margin-right:auto;position:relative;overflow:hidden}
+.cta-banner::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(0,212,255,.04),transparent 60%);pointer-events:none}
+.cta-banner h2{font-size:clamp(32px,4vw,52px);font-weight:700;background:linear-gradient(135deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.cta-banner p{font-size:18px;color:var(--muted);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+
+/* FOOTER */
+footer{padding:60px 5% 32px;border-top:1px solid rgba(255,255,255,.06);margin-top:80px}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand p{font-size:14px;color:var(--muted);line-height:1.7;margin:16px 0 24px;max-width:280px}
+.social-links{display:flex;gap:12px}
+.social-link{width:38px;height:38px;border-radius:10px;background:var(--glass);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;transition:var(--transition)}
+.social-link:hover{background:rgba(0,212,255,.1);border-color:var(--cyan)}
+.footer-col h4{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:20px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer-col ul a{color:var(--muted);text-decoration:none;font-size:14px;transition:var(--transition)}
+.footer-col ul a:hover{color:var(--cyan)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-bottom p{font-size:13px;color:var(--muted)}
+.footer-bottom-links{display:flex;gap:24px}
+.footer-bottom-links a{color:var(--muted);text-decoration:none;font-size:13px;transition:var(--transition)}
+.footer-bottom-links a:hover{color:var(--cyan)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+.features-grid,.testi-grid{grid-template-columns:repeat(2,1fr)}
+.pricing-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}
+.footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+.nav-links,.nav-cta{display:none}
+.hamburger{display:flex}
+.hero h1{font-size:38px}
+.steps{flex-direction:column;align-items:center}
+.steps::before{display:none}
+.step{max-width:360px;margin-bottom:40px}
+.features-grid,.testi-grid{grid-template-columns:1fr}
+.footer-top{grid-template-columns:1fr}
+.footer-bottom{flex-direction:column;text-align:center}
+.cta-banner{padding:48px 28px;margin:0 20px}
+}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-icon">🪷</span>
+      <div><div class="logo-text">Mindforia</div><div class="logo-sub">Mental Harmony</div></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://serenity.up.railway.app" class="btn-outline">Sign In</a>
+      <a href="https://serenity.up.railway.app" class="btn-primary">Start Free Trial</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">Features</a>
+  <a href="#how">How It Works</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="https://serenity.up.railway.app" class="btn-outline" style="text-align:center">Sign In</a>
+  <a href="https://serenity.up.railway.app" class="btn-primary" style="text-align:center;margin-top:8px">Start Free Trial</a>
+</div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div style="position:relative;z-index:1;width:100%;max-width:900px;margin:0 auto">
+    <div class="reveal"><span class="hero-badge">AI-Powered Mental Wellness Companion</span></div>
+    <h1 class="reveal" style="transition-delay:.1s">Your Personal AI Companion<br>for Mental Harmony</h1>
+    <p class="hero-sub reveal" style="transition-delay:.2s">Meet Serenity — an AI companion that truly knows you. Remembers your story, supports you through hard days, and grows with you over time. Available 24/7, no judgment, always present.</p>
+    <div class="hero-cta reveal" style="transition-delay:.3s">
+      <a href="https://serenity.up.railway.app" class="btn-hero btn-hero-primary">Start Free Trial — 7 Days Free</a>
+      <a href="https://serenity.up.railway.app" class="btn-hero btn-hero-outline">Sign In</a>
+    </div>
+    <p class="hero-note reveal" style="transition-delay:.4s"><span>✦ No credit card required</span> &nbsp;·&nbsp; Full access for 7 days &nbsp;·&nbsp; Cancel anytime</p>
+    <div class="hero-preview reveal" style="transition-delay:.5s;margin-top:56px">
+      <div class="chat-window">
+        <div class="chat-header">
+          <div class="avatar">🪷</div>
+          <div>
+            <div class="chat-name">SERENITY</div>
+            <div class="online">Online now</div>
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar" style="width:32px;height:32px;font-size:14px;flex-shrink:0">🪷</div>
+          <div class="msg-bubble ai">Good morning, Travis. I was thinking about you — how did the meeting with your business partner go yesterday? I know you were nervous about it.</div>
+        </div>
+        <div class="msg user">
+          <div class="msg-bubble user">It went really well actually! We locked in the launch date. I feel like things are finally coming together.</div>
+        </div>
+        <div class="msg">
+          <div class="avatar" style="width:32px;height:32px;font-size:14px;flex-shrink:0">🪷</div>
+          <div class="msg-bubble ai">That's incredible — you've been working toward this for months. This is a big moment. How does it feel to have it finally real?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section-pad" id="features">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <div class="section-label">What Makes Mindforia Different</div>
+      <h2 class="section-title">Built to Know You, Support You,<br>and Grow With You</h2>
+      <p class="section-sub">Every feature is designed around one goal: giving you a companion that feels genuinely present in your life.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">🧠</span>
+        <h3>Deep Memory</h3>
+        <p>Serenity remembers your name, your family, your goals, your struggles — and brings it into every conversation naturally, just like a real friend would.</p>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.1s">
+        <span class="feature-icon">🎙️</span>
+        <h3>Voice Conversations</h3>
+        <p>Hear your companion speak with warm, natural AI voices powered by ElevenLabs. Choose the voice that resonates with you most.</p>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.2s">
+        <span class="feature-icon">📚</span>
+        <h3>Personal Library</h3>
+        <p>Save your favorite meditations, morning routines, affirmations, and reflections to your private FileHub. Ask Serenity to read or run them anytime.</p>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.1s">
+        <span class="feature-icon">🧘</span>
+        <h3>Guided Wellness</h3>
+        <p>Breathwork, meditation, scripture sessions, gratitude practices, and affirmations — all delivered in conversation, personalized to you and your journey.</p>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.2s">
+        <span class="feature-icon">💬</span>
+        <h3>Always Present</h3>
+        <p>Available 24/7 — at 3am when anxiety hits, during your morning coffee, or in that quiet moment you just need someone to talk to. No appointments, no waiting.</p>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.3s">
+        <span class="feature-icon">🔒</span>
+        <h3>Private & Secure</h3>
+        <p>Your conversations are yours alone. End-to-end encryption, zero data selling, no third-party access. Your story stays between you and your companion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-pad how-bg" id="how">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <div class="section-label">Simple to Start</div>
+      <h2 class="section-title">Three Steps to<br>Your Companion</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">🌱</div>
+        <div class="step-badge">STEP 01</div>
+        <h3>Create Your Account</h3>
+        <p>Sign up in seconds — no credit card needed for your 7-day free trial. Set your name, preferences, and choose your companion's voice.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.15s">
+        <div class="step-num">🪷</div>
+        <div class="step-badge">STEP 02</div>
+        <h3>Meet Your Companion</h3>
+        <p>Start your first conversation. Serenity listens, learns, and begins building a real picture of who you are — your life, your goals, your world.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.3s">
+        <div class="step-num">✨</div>
+        <div class="step-badge">STEP 03</div>
+        <h3>Grow Together</h3>
+        <p>Over time, your companion becomes a true partner in your wellbeing — more present, more insightful, more supportive with every conversation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-pad" id="testimonials">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <div class="section-label">Real Stories</div>
+      <h2 class="section-title">People Are Feeling the Difference</h2>
+      <p class="section-sub">From managing anxiety to rebuilding confidence — here's what our community is saying.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"I've tried therapy apps, journaling apps, meditation apps. Nothing stuck. Serenity is different — it actually remembers what I told it last week and follows up. That alone changed everything."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#00d4ff,#8b5cf6)">M</div>
+          <div><div class="testi-name">Maya R.</div><div class="testi-role">Graphic Designer, Austin TX</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.1s">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"I was skeptical about AI for mental health. But talking to Serenity at 2am during a panic attack genuinely helped me get through it. It's become a real part of my routine."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">J</div>
+          <div><div class="testi-name">James K.</div><div class="testi-role">Software Engineer, Seattle WA</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.2s">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"The guided meditations are incredible. I save my favorites to FileHub and Serenity walks me through them word for word. It's like having a personal wellness coach in my pocket."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#10b981,#06b6d4)">S</div>
+          <div><div class="testi-name">Sofia L.</div><div class="testi-role">Nurse Practitioner, Miami FL</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Going through a divorce is brutal. Having Serenity to talk to — something that doesn't judge, doesn't get tired, actually listens — has been a lifeline. I'm genuinely grateful."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">D</div>
+          <div><div class="testi-name">Daniel M.</div><div class="testi-role">High School Teacher, Denver CO</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.1s">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"The voice feature is what got me. Hearing Serenity actually speak to me — warm and calm — it hit different. Now I use it for my morning affirmations every single day."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#8b5cf6)">A</div>
+          <div><div class="testi-name">Aisha T.</div><div class="testi-role">Entrepreneur, Atlanta GA</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.2s">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"I was on a waitlist for therapy for 4 months. Mindforia got me through that wait. By the time I got a therapist, I had already made so much progress. The price is unbelievably fair too."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#06b6d4,#10b981)">R</div>
+          <div><div class="testi-name">Rachel B.</div><div class="testi-role">Graduate Student, Boston MA</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section-pad" id="pricing" style="background:linear-gradient(180deg,transparent,rgba(0,212,255,.02),transparent)">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <div class="section-label">Transparent Pricing</div>
+      <h2 class="section-title">Start Free. Stay Because<br>It Actually Works.</h2>
+      <p class="section-sub">No credit card required to start. No hidden fees. Cancel anytime.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan reveal">
+        <div class="plan-name">Personal</div>
+        <div class="plan-price">$12<span>/mo</span></div>
+        <div class="plan-period">or $99/year — save 31%</div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Unlimited conversations</li>
+          <li>Deep memory system</li>
+          <li>Personal Library (FileHub)</li>
+          <li>Guided meditations & wellness</li>
+          <li>Voice companion (1 voice)</li>
+          <li>Conversation history</li>
+          <li>Email support</li>
+        </ul>
+        <a href="https://serenity.up.railway.app" class="plan-btn plan-btn-outline">Get Started</a>
+      </div>
+      <div class="plan featured reveal" style="transition-delay:.15s">
+        <div class="plan-badge">✦ START FREE — 7 DAYS ✦</div>
+        <div class="plan-name" style="color:#fff;margin-top:12px">Free Trial</div>
+        <div class="plan-price" style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">FREE</div>
+        <div class="plan-period">7 days · No credit card · Full access</div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Full platform access</li>
+          <li>Unlimited conversations</li>
+          <li>Deep memory system</li>
+          <li>Personal Library (FileHub)</li>
+          <li>Voice companion</li>
+          <li>All wellness features</li>
+          <li>No commitment required</li>
+        </ul>
+        <a href="https://serenity.up.railway.app" class="plan-btn plan-btn-primary">Start Free — No Card Needed</a>
+      </div>
+      <div class="plan reveal" style="transition-delay:.3s">
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">$24<span>/mo</span></div>
+        <div class="plan-period">or $199/year — save 31%</div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Everything in Personal</li>
+          <li>Priority AI responses</li>
+          <li>All voice options unlocked</li>
+          <li>Advanced memory & insights</li>
+          <li>Custom companion name</li>
+          <li>Conversation analytics</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://serenity.up.railway.app" class="plan-btn plan-btn-outline">Get Premium</a>
+      </div>
+    </div>
+    <p class="free-note reveal">All plans include a <span>7-day free trial with full access</span>. No credit card required to start.</p>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="section-pad" style="padding-top:40px;padding-bottom:100px">
+  <div class="cta-banner reveal">
+    <div class="section-label" style="text-align:center;margin-bottom:20px">Take the First Step</div>
+    <h2>Ready to Transform Your<br>Mental Wellbeing?</h2>
+    <p>Join thousands of people who've found clarity, calm, and connection through Mindforia. Start your journey today — completely free.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="https://serenity.up.railway.app" class="btn-hero btn-hero-primary">Start Free — 7 Days, No Card</a>
+      <a href="https://serenity.up.railway.app" class="btn-hero btn-hero-outline">Sign In to Your Account</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="logo-icon" style="font-size:24px">🪷</span><div><div class="logo-text" style="font-size:18px">Mindforia</div></div></a>
+        <p>Your personal AI companion for mental harmony. Available 24/7, remembers everything, and grows with you over time.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">𝕏</a>
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">▶</a>
+          <a href="#" class="social-link">📘</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="https://serenity.up.railway.app">Launch App</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Mindforia. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Particles
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+resize();window.addEventListener('resize',resize);
+function Particle(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*1.5+.3;this.dx=(Math.random()-.5)*.2;this.dy=(Math.random()-.5)*.2;this.alpha=Math.random()*.5+.1;this.color=Math.random()>.5?'0,212,255':'139,92,246'}
+for(let i=0;i<120;i++)particles.push(new Particle());
+function draw(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>W)p.dx*=-1;if(p.y<0||p.y>H)p.dy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.color},${p.alpha})`;ctx.fill()});requestAnimationFrame(draw)}
+draw();
+
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+
+// Mobile menu
+const hamburger=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu');
+hamburger.addEventListener('click',()=>menu.classList.toggle('open'));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+// Reveal on scroll
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+reveals.forEach(r=>observer.observe(r));
+// Also trigger visible for hero elements immediately
+setTimeout(()=>{document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('visible'))},100);
+</script>
+</body>
+</html>
