@@ -186,6 +186,11 @@ footer{padding:60px 5% 32px;border-top:1px solid rgba(255,255,255,.06);margin-to
 </style>
 </head>
 <body>
+<div style="background:rgba(0,212,255,0.08);border-bottom:1px solid rgba(0,212,255,0.2);text-align:center;padding:6px 20px;">
+  <span style="font-size:11px;font-weight:700;color:rgba(0,212,255,0.9);letter-spacing:2px;text-transform:uppercase;">Beta Testing</span>
+  <span style="font-size:11px;color:rgba(255,255,255,0.4);margin:0 8px;">·</span>
+  <span style="font-size:11px;color:rgba(255,255,255,0.5);">Platform still in development</span>
+</div>
 <canvas id="particles"></canvas>
 
 <nav id="nav">
@@ -396,10 +401,14 @@ footer{padding:60px 5% 32px;border-top:1px solid rgba(255,255,255,.06);margin-to
       <p class="section-sub">No credit card required to start. No hidden fees. Cancel anytime.</p>
     </div>
     <div class="pricing-grid">
-      <div class="plan reveal">
+      <!-- Personal — locked -->
+      <div class="plan reveal" style="opacity:0.45;pointer-events:none;filter:grayscale(0.5);position:relative;">
+        <div style="position:absolute;inset:0;border-radius:inherit;display:flex;align-items:center;justify-content:center;z-index:10;">
+          <div style="background:rgba(8,12,24,0.88);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:1.5px;text-transform:uppercase;">🔒 Still In Development</div>
+        </div>
         <div class="plan-name">Personal</div>
         <div class="plan-price">$12<span>/mo</span></div>
-        <div class="plan-period">or $99/year — save 31%</div>
+        <div class="plan-period">or $99/year - save 31%</div>
         <hr class="plan-divider">
         <ul class="plan-features">
           <li>Unlimited conversations</li>
@@ -410,10 +419,11 @@ footer{padding:60px 5% 32px;border-top:1px solid rgba(255,255,255,.06);margin-to
           <li>Conversation history</li>
           <li>Email support</li>
         </ul>
-        <a href="https://mindforia.com/platform?register=true" class="plan-btn plan-btn-outline">Get Started</a>
+        <a href="#" class="plan-btn plan-btn-outline" onclick="return false;">Get Started</a>
       </div>
+      <!-- Free Trial — active -->
       <div class="plan featured reveal" style="transition-delay:.15s">
-        <div class="plan-badge">✦ START FREE — 7 DAYS ✦</div>
+        <div class="plan-badge">⚡ START FREE — 7 DAYS ⚡</div>
         <div class="plan-name" style="color:#fff;margin-top:12px">Free Trial</div>
         <div class="plan-price" style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">FREE</div>
         <div class="plan-period">7 days · No credit card · Full access</div>
@@ -429,10 +439,14 @@ footer{padding:60px 5% 32px;border-top:1px solid rgba(255,255,255,.06);margin-to
         </ul>
         <a href="https://mindforia.com/platform?register=true" class="plan-btn plan-btn-primary">Start Free — No Card Needed</a>
       </div>
-      <div class="plan reveal" style="transition-delay:.3s">
+      <!-- Premium — locked -->
+      <div class="plan reveal" style="transition-delay:.3s;opacity:0.45;pointer-events:none;filter:grayscale(0.5);position:relative;">
+        <div style="position:absolute;inset:0;border-radius:inherit;display:flex;align-items:center;justify-content:center;z-index:10;">
+          <div style="background:rgba(8,12,24,0.88);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:1.5px;text-transform:uppercase;">🔒 Still In Development</div>
+        </div>
         <div class="plan-name">Premium</div>
         <div class="plan-price">$24<span>/mo</span></div>
-        <div class="plan-period">or $199/year — save 31%</div>
+        <div class="plan-period">or $199/year - save 31%</div>
         <hr class="plan-divider">
         <ul class="plan-features">
           <li>Everything in Personal</li>
@@ -443,7 +457,7 @@ footer{padding:60px 5% 32px;border-top:1px solid rgba(255,255,255,.06);margin-to
           <li>Conversation analytics</li>
           <li>Priority support</li>
         </ul>
-        <a href="https://mindforia.com/platform?register=true" class="plan-btn plan-btn-outline">Get Premium</a>
+        <a href="#" class="plan-btn plan-btn-outline" onclick="return false;">Get Premium</a>
       </div>
     </div>
     <p class="free-note reveal">All plans include a <span>7-day free trial with full access</span>. No credit card required to start.</p>
