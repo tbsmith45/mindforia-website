@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Mindforia - Mental Harmony</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --navy: #0a0f1e;
+            --cyan: #00d4ff;
+            --purple: #8b5cf6;
+            --glass: rgba(255,255,255,0.04);
+            --border: rgba(0,212,255,0.15);
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --gradient: linear-gradient(135deg, var(--cyan), var(--purple));
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--navy);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Particles Background */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Nav Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(12px);
+            background: rgba(10, 15, 30, 0.7);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1.2rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-signin {
+            color: var(--text);
+            border: 1px solid var(--border);
+            background: transparent;
+        }
+
+        .btn-signin:hover {
+            background: var(--glass);
+            border-color: var(--cyan);
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--navy);
+            border: none;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 0 4rem 0;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 212, 255, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.05);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Mission & Story */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .section-text {
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.6rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            color: var(--muted);
+        }
+
+        /* Promise Section */
+        .promise-section {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .promise-card {
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.1);
+            text-align: center;
+        }
+
+        .promise-card h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--purple);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 0 2rem 0;
+            background: rgba(10, 15, 30, 0.9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            color: var(--muted);
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-links-col h4 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--text);
+        }
+
+        .footer-links-col ul {
+            list-style: none;
+        }
+
+        .footer-links-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links-col ul li a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links-col ul li a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+            .grid-2, .values-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="stroke: var(--cyan); stroke-width: 2;">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                    <path d="M2 17L12 22L22 17"/>
+                    <path d="M2 12L12 17L22 12"/>
+                </svg>
+                Mindforia
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#" class="btn btn-signin">Sign In</a></li>
+                <li><a href="#" class="btn btn-primary">Start Free Trial</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="reveal">Our Mission: Mental Clarity & Peace of Mind for Everyone</h1>
+            <p class="reveal">Democratizing mental wellness support with advanced technology that adapts to your journey and guides you back to harmony.</p>
+        </div>
+    </section>
+
+    <!-- Mission & Story -->
+    <section class="container">
+        <div class="grid-2">
+            <div class="glass-card reveal">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">What is Mindforia?</h2>
+                <p class="section-text">Mindforia is an AI-powered mental wellness platform centered around Serenity AI — a dedicated emotional and mindfulness companion. We combine cutting-edge language models with established cognitive-behavioral principles to help you navigate stress, uncover mental clarity, and discover peace of mind.</p>
+                <p class="section-text">Whether you need interactive meditation guidance, breathwork coaching, deep reflection, or just someone who is always ready to listen, Serenity AI provides personalized support 24/7.</p>
+            </div>
+            <div class="glass-card reveal">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Our Story</h2>
+                <p class="section-text">The inspiration for Mindforia was born out of a stark reality: professional therapy is expensive, often costing hundreds of dollars per session, and waitlists are months long. Millions of people suffer in silence simply because they cannot afford support when they need it most.</p>
+                <p class="section-text">We built Mindforia to bridge this gap. We wanted to build a world where anyone, regardless of background or financial means, can immediately access tools that promote emotional resilience, mental stability, and deep, restorative peace.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section class="container">
+        <h2 class="section-title reveal">Our Core Values</h2>
+        <div class="values-grid">
+            <div class="glass-card value-card reveal">
+                <h3>Radical Accessibility</h3>
+                <p>Mental wellness shouldn't be a luxury. We believe in providing 24/7 support to anyone in need, offering immediate guidance without borders, barriers, or heavy price tags.</p>
+            </div>
+            <div class="glass-card value-card reveal">
+                <h3>Genuine Connection</h3>
+                <p>Serenity AI is designed to understand your unique context, learn from your history, and remember your individual journey to deliver support that actually fits your life.</p>
+            </div>
+            <div class="glass-card value-card reveal">
+                <h3>Privacy First</h3>
+                <p>Your emotional journey is sacred. We maintain the highest standards of data security and encryption so that your thoughts, feelings, and records stay strictly between you and your companion.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Promise -->
+    <section class="container promise-section">
+        <div class="glass-card promise-card reveal">
+            <h3>Our Promise</h3>
+            <p class="section-text" style="color: var(--text); font-size: 1.15rem; max-width: 750px; margin: 0 auto;">
+                Mindforia is not a replacement for professional clinical therapy. We act as a warm companion between therapy sessions, a bridge for those on clinical waitlists, and a daily anchor for general mental wellness. We are passionately committed to responsible, safe, and ethical AI wellness support.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="stroke: var(--cyan); stroke-width: 2;">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                        <path d="M2 17L12 22L22 17"/>
+                        <path d="M2 12L17L22 12"/>
+                    </svg>
+                    Mindforia
+                </a>
+                <p>Cultivating peace of mind and mental clarity through intelligent daily companions.</p>
+            </div>
+            <div class="footer-links-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Mindforia. All rights reserved.</p>
+            <p style="font-size: 0.75rem; color: var(--muted); max-width: 500px; text-align: right;">Disclaimer: Serenity AI is designed for wellness and emotional support and does not provide clinical diagnoses, psychiatric prescriptions, or crisis intervention.</p>
+        </div>
+    </footer>
+
+    <!-- Canvas Particles Script -->
+    <script>
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > width) this.speedX *= -1;
+                if (this.y < 0 || this.y > height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const particleCount = 70;
+        const particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw background glow
+            ctx.fillStyle = 'rgba(10, 15, 30, 0.8)';
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw a subtle colored background glow
+            const gradient = ctx.createRadialGradient(width/2, height/2, 10, width/2, height/2, Math.max(width, height));
+            gradient.addColorStop(0, 'rgba(139, 92, 246, 0.03)');
+            gradient.addColorStop(1, 'rgba(10, 15, 30, 0)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Draw lines between close particles
+            ctx.strokeStyle = 'rgba(0, 212, 255, 0.03)';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Reveal on Scroll Script
+        const reveals = document.querySelectorAll('.reveal');
+        
+        function checkReveal() {
+            const triggerBottom = window.innerHeight * 0.85;
+            reveals.forEach(reveal => {
+                const revealTop = reveal.getBoundingClientRect().top;
+                if (revealTop < triggerBottom) {
+                    reveal.classList.add('active');
+                } else {
+                    reveal.classList.remove('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkReveal);
+        // Initial call
+        checkReveal();
+    </script>
+</body>
+</html>
