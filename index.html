@@ -401,66 +401,57 @@ footer{padding:60px 5% 32px;border-top:1px solid rgba(255,255,255,.06);margin-to
       <p class="section-sub">No credit card required to start. No hidden fees. Cancel anytime.</p>
     </div>
     <div class="pricing-grid">
-      <!-- Personal — locked -->
-      <div class="plan reveal" style="opacity:0.45;pointer-events:none;filter:grayscale(0.5);position:relative;">
-        <div style="position:absolute;inset:0;border-radius:inherit;display:flex;align-items:center;justify-content:center;z-index:10;">
-          <div style="background:rgba(8,12,24,0.88);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:1.5px;text-transform:uppercase;">🔒 Still In Development</div>
-        </div>
-        <div class="plan-name">Personal</div>
-        <div class="plan-price">$12<span>/mo</span></div>
-        <div class="plan-period">or $99/year - save 31%</div>
+      <!-- Free Trial -->
+      <div class="plan reveal">
+        <div class="plan-name">🌿 Free Trial</div>
+        <div class="plan-price">$0<span>/mo</span></div>
+        <div class="plan-period">7 days · No credit card · Ad-supported</div>
         <hr class="plan-divider">
         <ul class="plan-features">
-          <li>Unlimited conversations</li>
-          <li>Deep memory system</li>
-          <li>Personal Library (FileHub)</li>
-          <li>Guided meditations & wellness</li>
-          <li>Voice companion (1 voice)</li>
-          <li>Conversation history</li>
-          <li>Email support</li>
-        </ul>
-        <a href="#" class="plan-btn plan-btn-outline" onclick="return false;">Get Started</a>
-      </div>
-      <!-- Free Trial — active -->
-      <div class="plan featured reveal" style="transition-delay:.15s">
-        <div class="plan-badge">⚡ START FREE — 7 DAYS ⚡</div>
-        <div class="plan-name" style="color:#fff;margin-top:12px">Free Trial</div>
-        <div class="plan-price" style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">FREE</div>
-        <div class="plan-period">7 days · No credit card · Full access</div>
-        <hr class="plan-divider">
-        <ul class="plan-features">
-          <li>Full platform access</li>
-          <li>Unlimited conversations</li>
-          <li>Deep memory system</li>
-          <li>Personal Library (FileHub)</li>
-          <li>Voice companion</li>
-          <li>All wellness features</li>
-          <li>No commitment required</li>
+          <li>100 daily chat credits</li>
+          <li>Free TTS voice</li>
+          <li>25 memory facts</li>
+          <li>25 episodic memories</li>
+          <li>Ad-supported</li>
         </ul>
         <a href="https://mindforia.com/platform?register=true" class="plan-btn plan-btn-primary">Start Free — No Card Needed</a>
       </div>
-      <!-- Premium — locked -->
-      <div class="plan reveal" style="transition-delay:.3s;opacity:0.45;pointer-events:none;filter:grayscale(0.5);position:relative;">
-        <div style="position:absolute;inset:0;border-radius:inherit;display:flex;align-items:center;justify-content:center;z-index:10;">
-          <div style="background:rgba(8,12,24,0.88);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:1.5px;text-transform:uppercase;">🔒 Still In Development</div>
-        </div>
-        <div class="plan-name">Premium</div>
-        <div class="plan-price">$24<span>/mo</span></div>
-        <div class="plan-period">or $199/year - save 31%</div>
+      <!-- Basic -->
+      <div class="plan featured reveal" style="transition-delay:.15s">
+        <div class="plan-badge">⚡ MOST POPULAR ⚡</div>
+        <div class="plan-name" style="color:#fff;margin-top:12px">⚡ Basic</div>
+        <div class="plan-price" style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">$9<span style="font-size:28px;font-weight:700">.99</span></div>
+        <div class="plan-period">per month · <span style="color:var(--cyan)">$95.90/yr — save 20%</span></div>
         <hr class="plan-divider">
         <ul class="plan-features">
-          <li>Everything in Personal</li>
-          <li>Priority AI responses</li>
-          <li>All voice options unlocked</li>
-          <li>Advanced memory & insights</li>
-          <li>Custom companion name</li>
-          <li>Conversation analytics</li>
-          <li>Priority support</li>
+          <li>1,000 chat credits / month</li>
+          <li>50 memory facts</li>
+          <li>75 episodic memories</li>
+          <li>All platform tools</li>
+          <li>Customer support</li>
+          <li>Ad-free</li>
+          <li>Unlimited files</li>
         </ul>
-        <a href="#" class="plan-btn plan-btn-outline" onclick="return false;">Get Premium</a>
+        <button onclick="startCheckout('basic')" class="plan-btn plan-btn-primary" id="btn-basic">Upgrade to Basic →</button>
+      </div>
+      <!-- Pro -->
+      <div class="plan reveal" style="transition-delay:.3s">
+        <div class="plan-name">🚀 Pro</div>
+        <div class="plan-price">$20<span style="font-size:28px;font-weight:700">.99</span><span>/mo</span></div>
+        <div class="plan-period">per month · <span style="color:var(--purple)">$201.50/yr — save 20%</span></div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Unlimited chat</li>
+          <li>200 memory facts</li>
+          <li>250 episodic memories</li>
+          <li>Ad-free</li>
+          <li>Customer support</li>
+        </ul>
+        <button onclick="startCheckout('pro')" class="plan-btn plan-btn-outline" id="btn-pro">Upgrade to Pro →</button>
       </div>
     </div>
-    <p class="free-note reveal">All plans include a <span>7-day free trial with full access</span>. No credit card required to start.</p>
+    <p class="free-note reveal">Start with a <span>7-day free trial</span> — no credit card needed. Upgrade or cancel anytime.</p>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:10px;opacity:.7">Payments processed securely by Stripe · Cancel anytime · No hidden fees</p>
   </div>
 </section>
 
@@ -572,6 +563,36 @@ const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isInt
 reveals.forEach(r=>observer.observe(r));
 // Also trigger visible for hero elements immediately
 setTimeout(()=>{document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('visible'))},100);
+
+// Stripe checkout from marketing site
+async function startCheckout(planId) {
+  const btn = document.getElementById('btn-' + planId);
+  // Check for auth token stored by the platform app
+  const token = localStorage.getItem('serenity_token') || localStorage.getItem('token');
+  if (!token) {
+    // Not logged in — send to platform login, then they can upgrade from Settings
+    window.location.href = 'https://mindforia.com/platform?register=true&upgrade=' + planId;
+    return;
+  }
+  if (btn) { btn.textContent = 'Loading…'; btn.disabled = true; }
+  try {
+    const r = await fetch('https://mindforia.com/api/subscription/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ planId })
+    });
+    const d = await r.json();
+    if (d.url) {
+      window.location.href = d.url;
+    } else {
+      alert(d.error || 'Could not start checkout. Please try from Settings inside the app.');
+      if (btn) { btn.textContent = planId === 'basic' ? 'Upgrade to Basic →' : 'Upgrade to Pro →'; btn.disabled = false; }
+    }
+  } catch(e) {
+    alert('Could not connect. Please upgrade from inside the app at Settings → Subscription.');
+    if (btn) { btn.textContent = planId === 'basic' ? 'Upgrade to Basic →' : 'Upgrade to Pro →'; btn.disabled = false; }
+  }
+}
 </script>
 </body>
 </html>
