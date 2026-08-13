@@ -64,7 +64,7 @@ nav.scrolled{background:rgba(10,15,30,0.92);backdrop-filter:blur(20px);border-co
 .chat-window{background:rgba(13,20,40,.8);border:1px solid var(--border);border-radius:20px;padding:28px;backdrop-filter:blur(20px);box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 0 1px rgba(0,212,255,.08),inset 0 1px 0 rgba(255,255,255,.05)}
 .chat-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.06)}
 .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(0,212,255,.3),rgba(139,92,246,.3));border:2px solid rgba(0,212,255,.4);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 20px rgba(0,212,255,.2)}
-.chat-name{font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--cyan);letter-spacing:1px}
+.chat-name{font-family:'Rajdhani',sans-serif;font-weight:600;color:var(--cyan);letter-spacing:1px}
 .online{font-size:12px;color:#22d3ee;display:flex;align-items:center;gap:5px}
 .online::before{content:'';width:7px;height:7px;border-radius:50%;background:#22d3ee;display:inline-block;animation:onlinePulse 2s infinite}
 @keyframes onlinePulse{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.4)}50%{box-shadow:0 0 0 6px rgba(34,211,238,0)}}
@@ -287,7 +287,7 @@ footer{padding:60px 5% 32px;border-top:1px solid rgba(255,255,255,.06);margin-to
       <h2 class="section-title">A Companion That Truly Knows You</h2>
     </div>
     <div style="display:flex;justify-content:center">
-      <div class="hero-preview reveal" style="transition-delay:.5s;margin-top:56px">
+      <div class="hero-preview reveal" style="margin-top:56px">
       <div class="chat-window">
         <div class="chat-header">
           <div class="avatar">🪷</div>
@@ -562,7 +562,7 @@ const reveals=document.querySelectorAll('.reveal');
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
 reveals.forEach(r=>observer.observe(r));
 // Also trigger visible for hero elements immediately
-setTimeout(()=>{document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('visible'))},100);
+document.querySelectorAll('.hero .reveal, .hero-preview .reveal').forEach(el=>{el.style.transition='none';el.classList.add('visible')});
 
 // Stripe checkout from marketing site
 async function startCheckout(planId) {
